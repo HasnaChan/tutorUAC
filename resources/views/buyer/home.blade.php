@@ -1,9 +1,9 @@
-@extends('layout.master')
+@extends('buyer.master')
 
 @section('content')
 
 <div>
-    INI HOME
+    INI HOME BUYER
 </div>
 
 @endsection

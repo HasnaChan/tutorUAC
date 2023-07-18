@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+//ui register
+Route::get('/register', function () {
+    return view('register');
+});
+
+//ui login
+Route::get('/login', function () {
+    return view('login');
+});
+
+//masukin registrasi ke database
+Route::post('/register', [LoginController::class,'store']);
+
+
+//validasi login dari database
+Route::post('/login', [LoginController::class,'login']);
+
+//logout
+Route::get('/logout', [LoginController::class, 'logout']);
+
+
+// developer
+Route::get('/developer', function () {
+    return view('developer.home');
+})->middleware('CheckDeveloper');
+
+//buyer
+Route::get('/buyer', function () {
+    return view('buyer.home');
+})->middleware('CheckBuyer');
