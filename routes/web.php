@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +45,16 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/developer', function () {
     return view('developer.home');
 })->middleware('CheckDeveloper');
+
+Route::group(['prefix' => 'developer', 'middleware' => 'CheckDeveloper'], function(){
+        Route::get('/', [UserController::class, 'developerIndex']);
+
+        Route::get('/add-game', [GameController::class, 'create']);
+        Route::post('/add-game', [GameController::class, 'store']);
+        Route::get('edit-game/{game_id}', [GameController::class, 'edit']);
+        Route::put('update-game', [GameController::class, 'update']);
+    });
+
 
 //buyer
 Route::get('/buyer', function () {

@@ -16,7 +16,7 @@ class CheckDeveloper
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role != 'developer'){
+        if(auth()->user()->role !== 'developer'){
             abort(403);
         }
         return $next($request);
