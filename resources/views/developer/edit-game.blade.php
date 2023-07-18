@@ -20,15 +20,36 @@
             <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="name"
                 value="{{ old('name', $game->name) }}" required />
 
+                @error('name')
+                    <h1 class="text-red-600 text-xl">
+                        {{ $message }}
+                    </h1>
+                @enderror
+
             <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="description" required
                 value="{{ old('description', $game->description) }}" />
+
+                @error('description')
+                    <h1 class="text-red-600 text-xl">
+                        {{ $message }}
+                    </h1>
+                @enderror
 
             <input type="number" class="block border border-grey-light w-full p-3 rounded mb-4" name="price" required
                 value="{{ old('price', $game->price) }}" />
 
+                @error('price')
+                    <h1 class="text-red-600 text-xl">
+                        {{ $message }}
+                    </h1>
+                @enderror
+
             <input
                 class="block my-4 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
                 id="image" type="file" name="image" onchange="previewImage()">
+
+
+
             <input type="hidden" id="image" name="oldImage" value="{{ $game->image }}">
             <img src="{{ asset('storage/' . $game->image) }}" alt=""
                 class="img-preview img-fluid mb-3 col-sm-5 d-block w-[30vw]">

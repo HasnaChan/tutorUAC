@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class GameController extends Controller
 {
-    public function create(){
+    public function create($locale = 'en'){
+
+        if(! in_array($locale, ['en','id'])){
+            $locale = 'en';
+        }
+
+        App::setLocale($locale);
+
         return view('developer.add-game');
     }
 
@@ -56,6 +64,11 @@ class GameController extends Controller
         Game::find($request->game_id)->update($validate);
 
         return redirect('/developer');
+    }
+
+    public function show(){
+        $games = Game::all();
+        return view('buyer.store', compact('games'));
     }
 }
 
